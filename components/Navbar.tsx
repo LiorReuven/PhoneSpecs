@@ -37,7 +37,12 @@ const NavBar = (): JSX.Element => {
           <Button as={Link} variant={'ghost'} href="/" >
             Home
           </Button>
-          
+          <Button as={Link} variant={'ghost'} href="/Latest" >
+            Latest
+          </Button>
+          <Button as={Link} variant={'ghost'} href="/brands" >
+            Brands
+          </Button>
           <ColorModeToggle></ColorModeToggle>
         </HStack>
       </Flex>
