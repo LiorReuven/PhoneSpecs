@@ -124,7 +124,6 @@ export const getStaticProps: GetStaticProps = async (
     };
   }
 
-  console.log(context.params);
 
   const phonesByBrand: phonePreview[] = data.data.phones;
   const title: string = data.data.title;

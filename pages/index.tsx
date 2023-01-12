@@ -3,16 +3,13 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Box,
   Button,
   Flex,
-  FormControl,
   Heading,
   Input,
   Stack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { json } from 'stream/consumers';
 import Pagination from '../components/Pagination';
 import PhoneCard from '../components/PhoneCard';
 import { phonePreview } from './Latest';

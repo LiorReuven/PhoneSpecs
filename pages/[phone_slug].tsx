@@ -4,13 +4,11 @@ import {
   Flex,
   Heading,
   Image,
-  Input,
   Spinner,
   Stack,
   Text,
 } from '@chakra-ui/react';
 import { GetStaticProps, GetStaticPropsContext, GetStaticPaths } from 'next';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
@@ -41,7 +39,6 @@ export default function BrandPage({
 }: phoneSpecsPageProps): JSX.Element {
   const router = useRouter();
 
-  console.log(phoneSpecs);
 
   if (router.isFallback) {
     return (

@@ -18,7 +18,6 @@ type BrandsProps = {
 export default function Brands({ brands }: BrandsProps): JSX.Element {
   const [query, setQuery] = useState('');
 
-  console.log(brands)
 
   return (
     <>

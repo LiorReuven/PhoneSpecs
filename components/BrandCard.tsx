@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, CardFooter, Heading, Image, Stack, Text } from "@chakra-ui/react"
+import { Box, Heading} from "@chakra-ui/react"
 import Link from "next/link"
 import { brandPreview } from "../pages/brands"
 

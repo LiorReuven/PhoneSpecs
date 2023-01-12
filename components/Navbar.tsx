@@ -17,7 +17,6 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 
 const NavBar = (): JSX.Element => {
-  const colorModeValue = useColorModeValue('#edeeee', '#1b202c');
 
  
   return (
