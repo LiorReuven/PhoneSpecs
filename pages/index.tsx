@@ -102,7 +102,7 @@ const paginationSearchedPhones = searchedPhones?.slice(firstPhoneIndex, lastPhon
               value={inputValue}
             />
           </Flex>
-          <Button mb={'4rem'} isLoading={isLoading} variant={'outline'} colorScheme={'blue'}>
+          <Button mb={'4rem'} isLoading={isLoading} onClick={onSubmitHandler} variant={'outline'} colorScheme={'blue'}>
             Search
           </Button>
           <Stack spacing={10}>

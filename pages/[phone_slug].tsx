@@ -66,9 +66,9 @@ export default function BrandPage({
           alignItems={'center'}
           justifyContent={{ md: 'center', base: 'space-evenly' }}
           backgroundColor={'blue.600'}
-            p={3}
-            borderRadius={'10px'}
-            w={'100%'}
+          p={3}
+          borderRadius={'10px'}
+          w={'100%'}
         >
           <Flex width={{ base: '70%', md: '50%', lg: '25%' }}>
             <Carousel dynamicHeight={true} showThumbs={false}>
@@ -85,11 +85,15 @@ export default function BrandPage({
             alignItems={'center'}
             direction={'column'}
             w={'fit-content'}
-            ml={{md: '3rem', base: 0}}
-            mt={{md:0, base:'2rem'}}
-            
+            ml={{ md: '3rem', base: 0 }}
+            mt={{ md: 0, base: '2rem' }}
           >
-            <Stack color={'black'} fontWeight={'semibold'} spacing={3} textAlign={'center'}>
+            <Stack
+              color={'black'}
+              fontWeight={'semibold'}
+              spacing={3}
+              textAlign={'center'}
+            >
               <Text>{phoneSpecs.brand}</Text>
               <Divider color={'white'} />
               <Text>{phoneSpecs.phone_name}</Text>
@@ -105,8 +109,52 @@ export default function BrandPage({
           </Flex>
         </Flex>
 
-        <Flex direction={'column'} border={'2px solid black'}>
-          <Text>{phoneSpecs.specifications[0].title}</Text>
+        <Flex
+          direction={'column'}
+          backgroundColor={'blue.600'}
+          p={3}
+          borderRadius={'10px'}
+          w={'100%'}
+        >
+          {phoneSpecs.specifications.map((specs, index) => {
+            return (
+              <Flex key={index} direction={'column'}>
+                <Stack spacing={4}>
+                  <Divider mt={'2rem'} />
+                  <Heading
+                    textAlign={'center'}
+                    color={'#fcc200'}
+                    size={'md'}
+                  >
+                    {specs.title}
+                  </Heading>
+                  <Divider mb={'2rem'} />
+
+                  {specs.specs.map((spec, index) => {
+                    return (
+                      <Flex key={index} pl={{lg:8, base:'0'}}>
+                        <Text fontWeight={'bold'} color={'whiteAlpha.800'}>
+                          {spec.key}:
+                        </Text>
+                        <Flex direction={'column'}>
+                          {spec.val.map((value, index) => {
+                            return (
+                              <Box ml={'1rem'} key={index}>
+                                <Text color={'black'} fontWeight={'semibold'}>
+                                  {value}
+                                </Text>
+                                <Divider />
+                              </Box>
+                            );
+                          })}
+                        </Flex>
+                      </Flex>
+                    );
+                  })}
+                </Stack>
+              </Flex>
+            );
+          })}
         </Flex>
       </Flex>
     </>
