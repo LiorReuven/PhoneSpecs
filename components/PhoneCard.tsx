@@ -1,4 +1,5 @@
 import { Box, Button, Card, CardBody, CardFooter, Heading, Image, Stack, Text } from "@chakra-ui/react"
+import Link from "next/link"
 import { phonePreview } from "../pages/Latest"
 
 type PhoneCardProps = {
@@ -30,7 +31,7 @@ const PhoneCard = ({phonePreview}: PhoneCardProps): JSX.Element => {
     </CardBody>
 
     <CardFooter  justifyContent={'center'}>
-      <Button variant='solid' colorScheme='blue'>
+      <Button as={Link} href={phonePreview.slug} variant='solid' colorScheme='blue'>
         Specs
       </Button>
     </CardFooter>

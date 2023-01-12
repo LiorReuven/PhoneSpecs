@@ -1,8 +1,9 @@
-import { Flex, Heading, Input, Stack } from '@chakra-ui/react';
+import { Flex, Heading, Input, Spinner, Stack } from '@chakra-ui/react';
 import { GetStaticProps, GetStaticPropsContext, GetStaticPaths } from 'next';
 import PhoneCard from '../../components/PhoneCard';
 import { useState } from 'react';
 import Pagination from '../../components/Pagination';
+import { useRouter } from 'next/router';
 
 export type phonePreview = {
   phone_name: string;
@@ -22,16 +23,32 @@ export default function BrandPage({
   phonesByBrand,
   title,
 }: BrandPageProps): JSX.Element {
+  const router = useRouter();
 
+  const [query, setQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [phonesPerPage, setPhonesPerPage] = useState(10);
 
-const [query, setQuery] = useState('');
-const [currentPage, setCurrentPage] = useState(1)  
-const [phonesPerPage, setPhonesPerPage] = useState(10)
+  const lastPhoneIndex = currentPage * phonesPerPage;
+  const firstPhoneIndex = lastPhoneIndex - phonesPerPage;
+  const paginationPhonesByBrand = phonesByBrand.slice(
+    firstPhoneIndex,
+    lastPhoneIndex
+  );
 
-
-const lastPhoneIndex = currentPage * phonesPerPage
-const firstPhoneIndex = lastPhoneIndex - phonesPerPage
-const paginationPhonesByBrand = phonesByBrand.slice(firstPhoneIndex, lastPhoneIndex)
+  if (router.isFallback) {
+    return (
+      <Flex minH={'80vh'} justifyContent={'center'} alignItems={'center'}>
+        <Spinner
+          thickness="6px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
 
   return (
     <>
@@ -45,7 +62,7 @@ const paginationPhonesByBrand = phonesByBrand.slice(firstPhoneIndex, lastPhoneIn
         <Heading mb={'4rem'}>{title}</Heading>
         <Flex
           mb={'3rem'}
-          w={{md:'50%', base:'100%'}}
+          w={{ md: '50%', base: '100%' }}
           border={'1px solid gray'}
           borderRadius={'10px'}
         >
@@ -59,26 +76,31 @@ const paginationPhonesByBrand = phonesByBrand.slice(firstPhoneIndex, lastPhoneIn
           />
         </Flex>
         <Stack spacing={10}>
-          {
-            query ?
-          phonesByBrand
-            ?.filter((phoneByBrand) =>
-              phoneByBrand.phone_name.toLowerCase().includes(query.toLowerCase())
-            )
-            .map((phoneByBrand: phonePreview, index) => {
-              return <PhoneCard key={index} phonePreview={phoneByBrand} />;
-            })
-            :
-            paginationPhonesByBrand
-            ?.filter((phoneByBrand) =>
-              phoneByBrand.phone_name.toLowerCase().includes(query.toLowerCase())
-            )
-            .map((phoneByBrand: phonePreview, index) => {
-              return <PhoneCard key={index} phonePreview={phoneByBrand} />;
-            })
-            }
+          {query
+            ? phonesByBrand
+                ?.filter((phoneByBrand) =>
+                  phoneByBrand.phone_name
+                    .toLowerCase()
+                    .includes(query.toLowerCase())
+                )
+                .map((phoneByBrand: phonePreview, index) => {
+                  return <PhoneCard key={index} phonePreview={phoneByBrand} />;
+                })
+            : paginationPhonesByBrand
+                ?.filter((phoneByBrand) =>
+                  phoneByBrand.phone_name
+                    .toLowerCase()
+                    .includes(query.toLowerCase())
+                )
+                .map((phoneByBrand: phonePreview, index) => {
+                  return <PhoneCard key={index} phonePreview={phoneByBrand} />;
+                })}
         </Stack>
-        <Pagination phonesPerPage={phonesPerPage} totalPhones={phonesByBrand.length} setCurrentPage={setCurrentPage}/>
+        <Pagination
+          phonesPerPage={phonesPerPage}
+          totalPhones={phonesByBrand.length}
+          setCurrentPage={setCurrentPage}
+        />
       </Flex>
     </>
   );
@@ -93,7 +115,14 @@ export const getStaticProps: GetStaticProps = async (
       method: 'GET',
     }
   );
+
   const data = await response.json();
+
+  if (!data.status) {
+    return {
+      notFound: true,
+    };
+  }
 
   console.log(context.params);
 
@@ -105,12 +134,13 @@ export const getStaticProps: GetStaticProps = async (
       phonesByBrand: phonesByBrand,
       title: title,
     },
+    revalidate: 259200,
   };
 };
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
     paths: [],
-    fallback: 'blocking',
+    fallback: true,
   };
 };

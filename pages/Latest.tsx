@@ -68,5 +68,6 @@ export const getStaticProps: GetStaticProps = async () => {
       latestPhones: latestPhones,
       title: title,
     },
+    revalidate: 259200,
   };
 };

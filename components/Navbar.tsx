@@ -35,7 +35,7 @@ const NavBar = (): JSX.Element => {
 
         <HStack spacing={'12px'}>
           <Button as={Link} variant={'ghost'} href="/" >
-            Home
+            Search
           </Button>
           <Button as={Link} variant={'ghost'} href="/Latest" >
             Latest
@@ -126,7 +126,7 @@ function MobileNav({}) {
                 variant={'ghost'}
                 href="/"
               >
-                Home
+                Search
               </Button>
               <Button
                 backgroundColor={buttonBackground}
