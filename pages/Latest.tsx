@@ -55,7 +55,7 @@ const paginationLatestPhones = latestPhones.slice(firstPhoneIndex, lastPhoneInde
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(`${process.env.API}/latest`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/latest`, {
     method: 'GET',
   });
   const data = await response.json();

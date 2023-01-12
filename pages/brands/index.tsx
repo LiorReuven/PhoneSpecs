@@ -70,7 +70,7 @@ export default function Brands({ brands }: BrandsProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(`${process.env.API}/brands`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/brands`, {
     method: 'GET',
   });
   const data = await response.json();

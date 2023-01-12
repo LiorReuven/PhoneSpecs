@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const response = await fetch(
-    `${process.env.API}/brands/${context.params?.brand_slug}`,
+    `${process.env.NEXT_PUBLIC_API}/brands/${context.params?.brand_slug}`,
     {
       method: 'GET',
     }
