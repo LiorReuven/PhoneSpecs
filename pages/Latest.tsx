@@ -1,6 +1,8 @@
 import { Flex, Heading, Stack } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import PhoneCard from '../components/PhoneCard';
+import {useState} from 'react'
+import Pagination from '../components/Pagination';
 
 export type phonePreview = {
   phone_name: string;
@@ -17,7 +19,17 @@ type LatestProps = {
 };
 
 export default function Latest({ latestPhones, title }: LatestProps): JSX.Element {
-  console.log(latestPhones);
+  
+const [currentPage, setCurrentPage] = useState(1)  
+const [phonesPerPage, setPhonesPerPage] = useState(5)
+
+
+
+const lastPhoneIndex = currentPage * phonesPerPage
+const firstPhoneIndex = lastPhoneIndex - phonesPerPage
+const paginationLatestPhones = latestPhones.slice(firstPhoneIndex, lastPhoneIndex)
+
+
   return (
     <>
       <Flex
@@ -29,13 +41,14 @@ export default function Latest({ latestPhones, title }: LatestProps): JSX.Elemen
       >
         <Heading mb={'4rem'}>{title}</Heading>
         <Stack spacing={10}>
-          {latestPhones.map((latestPhone:phonePreview, index)=> {
+          {paginationLatestPhones.map((latestPhone:phonePreview, index)=> {
             return (
               <PhoneCard key={index} phonePreview={latestPhone} />
             )
           })
           }
         </Stack>
+        <Pagination phonesPerPage={phonesPerPage} setCurrentPage={setCurrentPage} totalPhones={latestPhones.length}/>
       </Flex>
     </>
   );

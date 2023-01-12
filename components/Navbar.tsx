@@ -75,7 +75,7 @@ function MobileNav({}) {
 
   return (
     <>
-      <Flex display={['flex', 'flex', 'none', 'none']} direction={'column'}>
+      <Flex  display={['flex', 'flex', 'none', 'none']} direction={'column'}>
         <Flex
           w={'93%'}
           pt={'2rem'}
@@ -127,6 +127,30 @@ function MobileNav({}) {
                 href="/"
               >
                 Home
+              </Button>
+              <Button
+                backgroundColor={buttonBackground}
+                w={'150px'}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                as={Link}
+                variant={'ghost'}
+                href="/Latest"
+              >
+                Latest
+              </Button>
+              <Button
+                backgroundColor={buttonBackground}
+                w={'150px'}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                as={Link}
+                variant={'ghost'}
+                href="/brands"
+              >
+                Brands
               </Button>
             </VStack>
           </Flex>
