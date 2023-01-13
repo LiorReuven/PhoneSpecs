@@ -8,7 +8,8 @@ Website created to provide phones information and specifications
 - All phone brands page with search functionality
 - Get all phones by Brand
 - Pagination implemented(mainly in phones by brand page)
-- Utilization of pre-render functionality of nextjs  
+- Utilization of pre-render functionality of nextjs
+- External api calls
 - Chakra-UI
 - Mobile support
 
