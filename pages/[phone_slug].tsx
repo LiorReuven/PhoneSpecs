@@ -39,7 +39,6 @@ export default function BrandPage({
 }: phoneSpecsPageProps): JSX.Element {
   const router = useRouter();
 
-
   if (router.isFallback) {
     return (
       <Flex minH={'80vh'} justifyContent={'center'} alignItems={'center'}>
@@ -118,18 +117,14 @@ export default function BrandPage({
               <Flex key={index} direction={'column'}>
                 <Stack spacing={4}>
                   <Divider mt={'2rem'} />
-                  <Heading
-                    textAlign={'center'}
-                    color={'#fcc200'}
-                    size={'md'}
-                  >
+                  <Heading textAlign={'center'} color={'#fcc200'} size={'md'}>
                     {specs.title}
                   </Heading>
                   <Divider mb={'2rem'} />
 
                   {specs.specs.map((spec, index) => {
                     return (
-                      <Flex key={index} pl={{lg:8, base:'0'}}>
+                      <Flex key={index} pl={{ lg: 8, base: '0' }}>
                         <Text fontWeight={'bold'} color={'whiteAlpha.800'}>
                           {spec.key}:
                         </Text>

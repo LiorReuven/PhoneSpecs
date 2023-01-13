@@ -1,4 +1,4 @@
-import { Flex, Grid, GridItem,  Input,} from '@chakra-ui/react';
+import { Flex, Grid, GridItem, Input } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { useState } from 'react';
 import BrandCard from '../../components/BrandCard';
@@ -18,7 +18,6 @@ type BrandsProps = {
 export default function Brands({ brands }: BrandsProps): JSX.Element {
   const [query, setQuery] = useState('');
 
-
   return (
     <>
       <Flex
@@ -30,7 +29,7 @@ export default function Brands({ brands }: BrandsProps): JSX.Element {
       >
         <Flex
           my={'3rem'}
-          w={{md:'50%', base:'100%'}}
+          w={{ md: '50%', base: '100%' }}
           border={'1px solid gray'}
           borderRadius={'10px'}
         >
@@ -53,7 +52,9 @@ export default function Brands({ brands }: BrandsProps): JSX.Element {
         >
           {/* <Stack direction={'row'} flexWrap={'wrap'} spacing={20} justifyContent={'center'}> */}
           {brands
-            .filter((brand) => brand.brand_name.toLowerCase().includes(query.toLowerCase()))
+            .filter((brand) =>
+              brand.brand_name.toLowerCase().includes(query.toLowerCase())
+            )
             .map((brand: brandPreview) => {
               return (
                 <GridItem key={brand.brand_id}>

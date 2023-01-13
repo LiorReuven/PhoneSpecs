@@ -19,10 +19,9 @@ export default function Home() {
   const [searchedPhones, setSearchedPhones] = useState<phonePreview[]>([]);
   const [error, setError] = useState({ show: false, text: '' });
   const [isLoading, setisLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1)  
-  const [phonesPerPage, setPhonesPerPage] = useState(10)
-  const [showPagin, setShowPagin] = useState(false)
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [phonesPerPage, setPhonesPerPage] = useState(10);
+  const [showPagin, setShowPagin] = useState(false);
 
   const onSubmitHandler = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -35,32 +34,34 @@ export default function Home() {
 
     try {
       setisLoading(true);
-      setError({show:false, text:''});
+      setError({ show: false, text: '' });
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API}/search?query=${inputValue}`,
         { method: 'GET' }
       );
       const data = await response.json();
 
-      if (data.status && (data.data.phones.length > 0)) {
-        setSearchedPhones(data.data.phones)
+      if (data.status && data.data.phones.length > 0) {
+        setSearchedPhones(data.data.phones);
         if (data.data.phones.length > 10) {
-          setShowPagin(true)
+          setShowPagin(true);
         }
         setisLoading(false);
       } else {
-        setError({show:true,text:'No results found'})
+        setError({ show: true, text: 'No results found' });
         setisLoading(false);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
-
-const lastPhoneIndex = currentPage * phonesPerPage
-const firstPhoneIndex = lastPhoneIndex - phonesPerPage
-const paginationSearchedPhones = searchedPhones?.slice(firstPhoneIndex, lastPhoneIndex)
+  const lastPhoneIndex = currentPage * phonesPerPage;
+  const firstPhoneIndex = lastPhoneIndex - phonesPerPage;
+  const paginationSearchedPhones = searchedPhones?.slice(
+    firstPhoneIndex,
+    lastPhoneIndex
+  );
 
   return (
     <>
@@ -99,20 +100,29 @@ const paginationSearchedPhones = searchedPhones?.slice(firstPhoneIndex, lastPhon
               value={inputValue}
             />
           </Flex>
-          <Button mb={'4rem'} isLoading={isLoading} onClick={onSubmitHandler} variant={'outline'} colorScheme={'blue'}>
+          <Button
+            mb={'4rem'}
+            isLoading={isLoading}
+            onClick={onSubmitHandler}
+            variant={'outline'}
+            colorScheme={'blue'}
+          >
             Search
           </Button>
           <Stack spacing={10}>
-          {paginationSearchedPhones.map((searchedPhone:phonePreview, index)=> {
-            return (
-              <PhoneCard key={index} phonePreview={searchedPhone} />
-            )
-          })
-          }
-        </Stack>
-        { showPagin &&
-        <Pagination phonesPerPage={phonesPerPage} setCurrentPage={setCurrentPage} totalPhones={searchedPhones?.length}/>
-}
+            {paginationSearchedPhones.map(
+              (searchedPhone: phonePreview, index) => {
+                return <PhoneCard key={index} phonePreview={searchedPhone} />;
+              }
+            )}
+          </Stack>
+          {showPagin && (
+            <Pagination
+              phonesPerPage={phonesPerPage}
+              setCurrentPage={setCurrentPage}
+              totalPhones={searchedPhones?.length}
+            />
+          )}
           {error.show && (
             <Alert
               mt={'4rem'}
@@ -124,9 +134,7 @@ const paginationSearchedPhones = searchedPhones?.slice(firstPhoneIndex, lastPhon
             >
               <AlertIcon />
               <AlertTitle>Invalid!</AlertTitle>
-              <AlertDescription>
-                {error.text}
-              </AlertDescription>
+              <AlertDescription>{error.text}</AlertDescription>
             </Alert>
           )}
         </Flex>

@@ -1,7 +1,7 @@
 import { Flex, Heading, Stack } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import PhoneCard from '../components/PhoneCard';
-import {useState} from 'react'
+import { useState } from 'react';
 import Pagination from '../components/Pagination';
 
 export type phonePreview = {
@@ -9,26 +9,28 @@ export type phonePreview = {
   slug: string;
   image: string;
   detail: string;
-  hits?:number,
-  favorites?:number
+  hits?: number;
+  favorites?: number;
 };
 
 type LatestProps = {
-  latestPhones: phonePreview[],
+  latestPhones: phonePreview[];
   title: string;
 };
 
-export default function Latest({ latestPhones, title }: LatestProps): JSX.Element {
-  
-const [currentPage, setCurrentPage] = useState(1)  
-const [phonesPerPage, setPhonesPerPage] = useState(5)
+export default function Latest({
+  latestPhones,
+  title,
+}: LatestProps): JSX.Element {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [phonesPerPage, setPhonesPerPage] = useState(5);
 
-
-
-const lastPhoneIndex = currentPage * phonesPerPage
-const firstPhoneIndex = lastPhoneIndex - phonesPerPage
-const paginationLatestPhones = latestPhones.slice(firstPhoneIndex, lastPhoneIndex)
-
+  const lastPhoneIndex = currentPage * phonesPerPage;
+  const firstPhoneIndex = lastPhoneIndex - phonesPerPage;
+  const paginationLatestPhones = latestPhones.slice(
+    firstPhoneIndex,
+    lastPhoneIndex
+  );
 
   return (
     <>
@@ -41,14 +43,15 @@ const paginationLatestPhones = latestPhones.slice(firstPhoneIndex, lastPhoneInde
       >
         <Heading mb={'4rem'}>{title}</Heading>
         <Stack spacing={10}>
-          {paginationLatestPhones.map((latestPhone:phonePreview, index)=> {
-            return (
-              <PhoneCard key={index} phonePreview={latestPhone} />
-            )
-          })
-          }
+          {paginationLatestPhones.map((latestPhone: phonePreview, index) => {
+            return <PhoneCard key={index} phonePreview={latestPhone} />;
+          })}
         </Stack>
-        <Pagination phonesPerPage={phonesPerPage} setCurrentPage={setCurrentPage} totalPhones={latestPhones.length}/>
+        <Pagination
+          phonesPerPage={phonesPerPage}
+          setCurrentPage={setCurrentPage}
+          totalPhones={latestPhones.length}
+        />
       </Flex>
     </>
   );

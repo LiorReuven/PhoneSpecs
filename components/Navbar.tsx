@@ -17,8 +17,6 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 
 const NavBar = (): JSX.Element => {
-
- 
   return (
     <>
       <Flex
@@ -30,16 +28,23 @@ const NavBar = (): JSX.Element => {
         justifyContent="space-between"
         alignItems={'center'}
       >
-        <Link href={'/'}><Heading>Phone<Text color={'blue.400'} as={'span'}>Specs</Text></Heading></Link>
+        <Link href={'/'}>
+          <Heading>
+            Phone
+            <Text color={'blue.400'} as={'span'}>
+              Specs
+            </Text>
+          </Heading>
+        </Link>
 
         <HStack spacing={'12px'}>
-          <Button as={Link} variant={'ghost'} href="/" >
+          <Button as={Link} variant={'ghost'} href="/">
             Search
           </Button>
-          <Button as={Link} variant={'ghost'} href="/Latest" >
+          <Button as={Link} variant={'ghost'} href="/Latest">
             Latest
           </Button>
-          <Button as={Link} variant={'ghost'} href="/brands" >
+          <Button as={Link} variant={'ghost'} href="/brands">
             Brands
           </Button>
           <ColorModeToggle></ColorModeToggle>
@@ -70,11 +75,9 @@ function MobileNav({}) {
   const buttonBackground = useColorModeValue('gray.300', 'whiteAlpha.200');
   const mainColors = useColorModeValue('gray.50', 'blackAlpha.700');
 
-
-
   return (
     <>
-      <Flex  display={['flex', 'flex', 'none', 'none']} direction={'column'}>
+      <Flex display={['flex', 'flex', 'none', 'none']} direction={'column'}>
         <Flex
           w={'93%'}
           pt={'2rem'}
