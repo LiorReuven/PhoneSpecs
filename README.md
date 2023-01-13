@@ -11,6 +11,7 @@ Website created to provide phones information and specifications
 - Utilization of pre-render functionality of nextjs
 - External api calls
 - Chakra-UI
+- Light/Dark Mode
 - Mobile support
 
 ## Images
