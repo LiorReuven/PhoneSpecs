@@ -2,7 +2,7 @@
 Website created to provide phones information and specifications
 ## Features
 
-- Written with TypeScript
+- Written in TypeScript
 - Search functionality to search for a specific phone
 - The latest released phones page 
 - All phone brands page with search functionality
