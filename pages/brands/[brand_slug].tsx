@@ -31,7 +31,7 @@ export default function BrandPage({
 
   const lastPhoneIndex = currentPage * phonesPerPage;
   const firstPhoneIndex = lastPhoneIndex - phonesPerPage;
-  const paginationPhonesByBrand = phonesByBrand.slice(
+  const paginationPhonesByBrand = phonesByBrand?.slice(
     firstPhoneIndex,
     lastPhoneIndex
   );
