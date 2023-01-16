@@ -33,6 +33,8 @@ const components = {
 export const theme = extendTheme({ config, styles, components });
 
 export default function App({ Component, pageProps }: AppProps) {
+  if (process.env.NODE_ENV === "production")
+  console.log = function no_console() {};
   return (
     <ChakraProvider theme={theme}>
       <Layout>
